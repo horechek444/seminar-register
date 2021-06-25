@@ -10,8 +10,12 @@
 
 .main__wrapper {
   position: relative;
-  padding: 15px 15px 215px;
+  padding: 0 0 215px;
   max-width: 1000px;
   margin: 0 auto;
   background-color: #ffffff;
+}
+
+.required {
+  color: red;
 }
