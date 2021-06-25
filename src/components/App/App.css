@@ -1,0 +1,17 @@
+.main__background {
+  position: relative;
+  height: auto;
+  min-height: 100%;
+  width: 100%;
+  min-width: 960px;
+  overflow: hidden;
+  background: #f8f8f8 url('../../images/site_bg.png') 50% 0 no-repeat;
+}
+
+.main__wrapper {
+  position: relative;
+  padding: 15px 15px 215px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
