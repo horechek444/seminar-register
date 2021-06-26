@@ -1,0 +1,18 @@
+.main {
+  padding: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.select__wrapper {
+  position: relative;
+}
