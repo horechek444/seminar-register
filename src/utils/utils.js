@@ -8,6 +8,10 @@ export const companies = [
     value: 1,
     name: "АО ИГиРГИ"
   },
+  {
+    value: 2,
+    name: "ПАО «НК «РОСНЕФТЬ»"
+  },
 ];
 
 export const reportDirections = [

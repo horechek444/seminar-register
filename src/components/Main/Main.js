@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Main.css';
 import {Form, Formik} from "formik";
 import * as yup from "yup";
@@ -6,7 +6,9 @@ import Input from "../Input/Input";
 import NumberFormat from 'react-number-format';
 import {reportDirections} from "../../utils/utils";
 
-const Main = () => {
+const Main = ({handlePopupOpen}) => {
+  const [] = useState();
+
   const phoneRegExp = /^(\+7[(\-) ]?)(\(?\d{3}\)?[(\-) ]?)?[\d\- ]{7,10}$/
 
   const validationSchema = yup.object().shape({
@@ -78,6 +80,7 @@ const Main = () => {
                      errors={errors}
               />
             </div>
+
             <div className="form__row">
               <div className="select__wrapper">
                 <select
@@ -88,7 +91,7 @@ const Main = () => {
                   placeholder="Компания"
                 >
                   <optgroup label="Периметр ПАО &laquo;НК &laquo;Роснефть&raquo;">
-                    <option value="">Компания</option>*/}
+                    <option value="">Компания</option>
                     <option value="1">АО "ИГиРГИ"</option>
                     <option value="2">ПАО «НК «РОСНЕФТЬ»</option>
                     <option value="3">АО «Востсибнефтегаз»</option>
@@ -117,27 +120,49 @@ const Main = () => {
 
             <div className="form__row">
               <span>Участвую в семинаре как:</span>
-              <button>Докладчик / соавтор</button>
-              <button>Слушатель</button>
+              <button className="button">Докладчик / соавтор</button>
+              <button className="button">Слушатель</button>
             </div>
 
-            <div className="">
-              <select name="companyId"
-                      value={values.companyId}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Компания">
-                <option selected disabled>Направление доклада</option>
-                {reportDirections.map((direction) => (
-                  <option value={direction}>{direction}</option>
+            <div className="report">
+              <div className="form__row">
+                <select name="companyId"
+                        value={values.companyId}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="Компания">
+                  <option value="" selected disabled>Направление доклада</option>
+                  {reportDirections.map((direction) => (
+                    <option value={direction}>{direction}</option>
                   ))}
-              </select>
+                </select>
+                <button className="button">Докладчик</button>
+                <button className="button">Соавтор</button>
+              </div>
+
+              <div className="form__row">
+                <Input type="text"
+                       name="subject"
+                       handleChange={handleChange}
+                       handleBlur={handleBlur}
+                       values={values}
+                       placeholder="Тема доклада"
+                       isRequired={true}
+                       touched={touched}
+                       errors={errors}
+                />
+
+                <textarea cols="20"
+                          rows="5"
+                          name="outline"
+                          placeholder="Краткое содержание доклада"/>
+              </div>
             </div>
 
             <div className="form__row">
               <span>Форма участия:</span>
-              <button>Очная</button>
-              <button>Заочная</button>
+              <button className="button">Очная</button>
+              <button className="button">Заочная</button>
             </div>
 
             <span>Информация для связи:</span>
@@ -164,7 +189,7 @@ const Main = () => {
               />
 
               <div className="input-wrapper">
-                <label>
+                <label className="form__label">
                   <NumberFormat type="phone"
                                 name="mobilePhone"
                                 onChange={handleChange}
@@ -182,10 +207,29 @@ const Main = () => {
               </div>
             </div>
 
+            <div className="form__row">
+              <span className="footer__email">Остались вопросы? Напиши нам:&ensp;
+                <a className="footer__link"
+                   href="mailto:seminar@igirgi.su"
+                   target="_blank"
+                   rel="noreferrer"
+                >seminar@igirgi.su
+                </a>
+              </span>
+              <label>
+                <input type="radio"/>&ensp;
+                я согласен на&ensp;
+                <a href="#" onClick={handlePopupOpen}>обработку персональных данных</a>
+                <span className="required">*</span>
+              </label>
+            </div>
+
             <button disabled={!isValid}
                     onClick={handleSubmit}
-                    type="submit">
-              Отправить
+                    type="submit"
+                    className="submit button"
+            >
+              Отправить заявку
             </button>
           </Form>
         )}

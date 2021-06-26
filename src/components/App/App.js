@@ -21,8 +21,8 @@ function App() {
     <div className="main__background">
       <div className="main__wrapper">
         <Header />
-        <Main />
-        <Footer handlePopupOpen={handlePopupOpen} />
+        <Main handlePopupOpen={handlePopupOpen}/>
+        <Footer />
         <PersonalDataPopup isOpen={showPersonalDataPopup} onClose={handlePopupClose} />
       </div>
     </div>

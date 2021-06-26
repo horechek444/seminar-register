@@ -4,7 +4,7 @@ import './Input.css';
 const Input = ({type, name, handleChange, handleBlur, values, placeholder, isRequired, touched, errors}) => {
   return (
     <div className="input-wrapper">
-      <label>
+      <label className="form__label">
         <input
           type={type}
           name={name}
