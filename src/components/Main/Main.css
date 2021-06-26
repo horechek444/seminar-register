@@ -12,6 +12,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .form__row:nth-child(8) {
@@ -37,5 +38,42 @@
 }
 
 .button:hover {
+  background-color: rgb(255, 235, 135);
+}
+
+::-webkit-input-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 15px;
+}
+
+::-moz-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 15px;
+}
+
+:-moz-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 15px;
+}
+
+:-ms-input-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 15px;
+}
+
+.textarea {
+  min-width: 450px;
+  padding: .375rem .75rem;
+}
+
+.report {
+  display: none;
+}
+
+.report_active {
+  display: block;
+}
+
+.button__speaker_active {
   background-color: rgb(255, 235, 135);
 }
