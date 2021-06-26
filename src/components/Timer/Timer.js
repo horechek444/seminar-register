@@ -3,24 +3,24 @@ import useTimer from "../../hooks/useTimer";
 import './Timer.css';
 
 const Timer = () => {
-  const {days, hours, minutes, seconds} = useTimer();
+  const {times} = useTimer();
 
   return (
     <div className="timer">
       <div className="timer__field">
-        <span className="timer__number">{String(days).length === 1 ? `0${days}` : days}</span>
+        <span className="timer__number">{String(times.days).length === 1 ? `0${times.days}` : times.days}</span>
         Дней
       </div>
       <div className="timer__field">
-        <span className="timer__number">{String(hours).length === 1 ? `0${hours}` : hours}</span>
+        <span className="timer__number">{String(times.hours).length === 1 ? `0${times.hours}` : times.hours}</span>
         Часов
       </div>
       <div className="timer__field">
-        <span className="timer__number">{String(minutes).length === 1 ? `0${minutes}` : minutes}</span>
+        <span className="timer__number">{String(times.minutes).length === 1 ? `0${times.minutes}` : times.minutes}</span>
         Минут
       </div>
       <div className="timer__field">
-        <span className="timer__number">{String(seconds).length === 1 ? `0${seconds}` : seconds}</span>
+        <span className="timer__number">{String(times.seconds).length === 1 ? `0${times.seconds}` : times.seconds}</span>
         Секунд
       </div>
     </div>

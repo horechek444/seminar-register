@@ -19,7 +19,7 @@ const Main = ({handlePopupOpen}) => {
     setIsSpeaker(false);
   }
 
-  const phoneRegExp = /^(\+7[(\-) ]?)(\(?\d{3}\)?[(\-) ]?)?[\d\- ]{7,10}$/;
+  const phoneRegExp = /^.+\d.+\d\d\d.+\d\d\d.+\d\d.+\d\d$/;
 
   const validationSchema = yup.object().shape({
     secondName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
@@ -31,7 +31,7 @@ const Main = ({handlePopupOpen}) => {
     subject: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
     email: yup.string().max(32).email("Значение должно быть email-адресом").required("Поле обязательно к заполнению"),
     officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
-    mobilePhone: yup.string().matches(phoneRegExp).required("Поле обязательно к заполнению"),
+    mobilePhone: yup.string().matches(phoneRegExp, "<kf,kf").required("Поле обязательно к заполнению"),
   })
 
   return (
