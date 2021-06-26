@@ -10,7 +10,7 @@ const Footer = ({handlePopupOpen}) => {
       <label>
         <input type="radio"/>&ensp;
         я согласен на&ensp;
-        <a href="-" onClick={handlePopupOpen}>обработку персональных данных</a>
+        <a href="#" onClick={handlePopupOpen}>обработку персональных данных</a>
         <span className="required">*</span>
       </label>
     </footer>

@@ -1,17 +1,14 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
-}
-
-.header__logo {
-  width: 200px;
-  height: auto;
+  padding: 15px 15px 15px 80px;
 }
 
 .header__wrapper {
   display: flex;
   flex-direction: column;
+  min-height: 200px;
+  justify-content: space-between;
 }
 
 .header__title {
