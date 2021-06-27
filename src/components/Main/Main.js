@@ -6,9 +6,13 @@ import NumberFormat from 'react-number-format';
 import {reportDirections, validationSchemaForAll, validationSchemaForSpeaker, companies} from "../../utils/utils";
 import CustomSelect from "../Select/CustomSelect";
 import Button from "../Button/Button";
+import Tourney from "../Tourney/Tourney";
 
 const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
   const [isSpeaker, setIsSpeaker] = useState(true);
+  const [formValues, setFormValues] = useState({});
+
+  // let companyName = formValues ? formValues.companyId.label : null;
 
   const handleToggleSpeaker = (e) => {
     e.preventDefault();
@@ -17,17 +21,17 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
 
   const handleSubmit = (values, {resetForm}) => {
     resetForm({values: ''});
+    setFormValues(values);
     console.log(values);
   }
 
   const handleEmptyObject = (object) => {
     for (let key in object) {
-      console.log(key)
-      // if (key == '') {
-      //   return false;
-      // }
+      if (key in object) {
+        return false;
+      }
     }
-    // return true;
+    return true;
   }
 
   return (
@@ -239,7 +243,9 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
               </div>
             </div>
 
-            <div className="form__row">
+            <Tourney company={"companyName"} />
+
+            <div className="form__row form__row_dashed">
               <span className="footer__email">Остались вопросы? Напиши нам:&ensp;
                 <a className="footer__link"
                    href="mailto:seminar@igirgi.su"

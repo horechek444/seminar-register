@@ -14,7 +14,7 @@ const AddCompanyPopup = ({isOpen, onClose}) => {
   return (
     <Popup isOpen={isOpen} onClose={onClose}>
       <h3 className="popup__title">Добавить компанию</h3>
-      <p className="popup__paragraph">
+      <div className="popup__wrapper">
         <Formik initialValues={{
           companyName: '',
         }}
@@ -54,7 +54,7 @@ const AddCompanyPopup = ({isOpen, onClose}) => {
             </Form>
           )}
         </Formik>
-      </p>
+      </div>
     </Popup>
   );
 };

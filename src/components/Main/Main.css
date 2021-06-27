@@ -16,7 +16,7 @@
   align-items: center;
 }
 
-.form__row:nth-child(8) {
+.form__row_dashed {
   border-top: 1px dashed darkgrey;
   padding-top: 15px;
 }
