@@ -1,28 +1,38 @@
 import React from 'react';
 import Select from "react-select";
-import {companies} from "../../utils/utils";
+import './CustomSelect.css';
 
-const CustomSelect = ({values, setFieldValue, setFieldTouched, errors, touched}) => {
+const CustomSelect = ({name, placeholder, options, values, setFieldValue, setFieldTouched, errors, touched}) => {
   const formatGroupLabel = (data) => (
-    <span>{data.group}</span>
+    <>
+      <span>{data.label}</span>
+    </>
   );
 
+  const handleSelectChange = (value) => {
+    setFieldValue(name, value);
+  };
+
+  const handleSelectBlur = () => {
+    setFieldTouched(name, true);
+  };
+
   return (
-    <>
-      <Select name="companyId"
-              options={companies}
-              value={values.companyId}
-              onChange={value => setFieldValue("companyId", value)}
-              onBlur={() => setFieldTouched("companyId", true)}
-              placeholder="Компания"
+    <div className="select__wrapper">
+      <Select name={name}
+              options={options}
+              value={values[name]}
+              onChange={handleSelectChange}
+              onBlur={handleSelectBlur}
+              placeholder={placeholder}
               className="select"
-              error={errors.companyId}
-              touched={errors.companyId}
+              error={errors[name]}
+              touched={errors[name]}
               formatGroupLabel={formatGroupLabel}
       />
       <span className="required">*</span>
-      {touched.companyId && errors.companyId && <span className="error">{errors.companyId}</span>}
-    </>
+      {touched[name] && errors[name] && <span className="error">{errors[name]}</span>}
+    </div>
   )
 };
 

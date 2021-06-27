@@ -4,7 +4,8 @@ import {Form, Formik} from "formik";
 import Input from "../Input/Input";
 import NumberFormat from 'react-number-format';
 import {reportDirections, validationSchemaForAll, validationSchemaForSpeaker, companies} from "../../utils/utils";
-import Select from "react-select";
+import CustomSelect from "../Select/CustomSelect";
+import Button from "../Button/Button";
 
 const Main = ({handlePopupOpen}) => {
   const [isSpeaker, setIsSpeaker] = useState(true);
@@ -13,13 +14,6 @@ const Main = ({handlePopupOpen}) => {
     e.preventDefault();
     setIsSpeaker(!isSpeaker);
   }
-
-  const formatGroupLabel = (data) => (
-    <>
-      <span>{data.label}</span>
-      <span>{data.options.length}</span>
-    </>
-  );
 
   return (
     <main className="main">
@@ -85,23 +79,15 @@ const Main = ({handlePopupOpen}) => {
             </div>
 
             <div className="form__row">
-              <div className="select__wrapper">
-                <Select name="companyId"
-                        options={companies}
-                        value={values.companyId}
-                        onChange={value => setFieldValue("companyId", value)}
-                        onBlur={() => setFieldTouched("companyId", true)}
-                        placeholder="Компания"
-                        className="select"
-                        error={errors.companyId}
-                        touched={touched.companyId}
-                        formatGroupLabel={formatGroupLabel}
-                />
-                <span className="required">*</span>
-                {touched.companyId && errors.companyId &&
-                <span className="error">{errors.companyId}</span>}
-
-              </div>
+              <CustomSelect name="companyId"
+                            placeholder="Компания"
+                            options={companies}
+                            values={values}
+                            setFieldValue={setFieldValue}
+                            setFieldTouched={setFieldTouched}
+                            errors={errors}
+                            touched={touched}
+              />
 
               <Input type="text"
                      name="position"
@@ -118,37 +104,40 @@ const Main = ({handlePopupOpen}) => {
             <div className="form__row">
               <span className="form__title">Участвую в семинаре как:</span>
               <div className="form__wrapper">
-                <button
-                  className={isSpeaker ? "button button__speaker button__speaker_active" : "button button__speaker"}
-                  onClick={handleToggleSpeaker}>Докладчик/соавтор
-                </button>
-                <button
+                <Button className={isSpeaker ? "button button__speaker button__speaker_active" : "button button__speaker"}
+                        onClick={handleToggleSpeaker}
+                        title="Докладчик/соавтор"
+                        type="button"
+                />
+                <Button
                   className={isSpeaker ? "button button__speaker" : "button button__speaker button__speaker_active"}
-                  onClick={handleToggleSpeaker}>Слушатель
-                </button>
+                  onClick={handleToggleSpeaker}
+                  title="Слушатель"
+                  type="button"
+                />
               </div>
             </div>
 
             <div className={isSpeaker ? "report report_active" : "report"}>
               <div className="form__row">
-                <div className="select__wrapper">
-                  <Select name="reportDirection"
-                          options={reportDirections}
-                          value={values.reportDirection}
-                          onChange={value => setFieldValue("reportDirection", value)}
-                          onBlur={() => setFieldTouched("reportDirection", true)}
-                          placeholder="Направление доклада"
-                          className="select"
-                          error={errors.reportDirection}
-                          touched={touched.reportDirection}
-                  />
-                  <span className="required">*</span>
-                  {touched.reportDirection && errors.reportDirection &&
-                  <span className="error">{errors.reportDirection}</span>}
-                </div>
+                <CustomSelect name="reportDirection"
+                              placeholder="Направление доклада"
+                              options={reportDirections}
+                              values={values}
+                              setFieldValue={setFieldValue}
+                              setFieldTouched={setFieldTouched}
+                              errors={errors}
+                              touched={touched}
+                />
                 <div className="form__wrapper">
-                  <button className="button">Докладчик</button>
-                  <button className="button">Соавтор</button>
+                  <Button className="button"
+                          title="Докладчик"
+                          type="button"
+                  />
+                  <Button className="button"
+                          title="Соавтор"
+                          type="button"
+                  />
                 </div>
               </div>
 
@@ -174,14 +163,23 @@ const Main = ({handlePopupOpen}) => {
             </div>
 
             <div className="form__row">
-              <span>Форма участия:</span>
+              <span className="form__title">Форма участия:</span>
               <div className="form__wrapper">
-                <button className="button">Очная</button>
-                <button className="button">Заочная</button>
+                <Button className="button"
+                        title="Очная"
+                        type="button"
+                />
+                <Button className="button"
+                        title="Заочная"
+                        type="button"
+                />
               </div>
             </div>
 
-            <span>Информация для связи:</span>
+            <div className="form__row">
+              <span className="form__title">Информация для связи:</span>
+            </div>
+
             <div className="form__row">
               <Input type="email"
                      name="email"
@@ -240,13 +238,11 @@ const Main = ({handlePopupOpen}) => {
               </label>
             </div>
 
-            <button disabled={!isValid}
-                    onClick={handleSubmit}
+            <Button className="submit button"
                     type="submit"
-                    className="submit button"
-            >
-              Отправить заявку
-            </button>
+                    onClick={handleSubmit}
+                    title="Отправить заявку"
+            />
           </Form>
         )}
       </Formik>

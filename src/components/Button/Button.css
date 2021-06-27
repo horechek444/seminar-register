@@ -1,0 +1,19 @@
+.button {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 6px 15px;
+  min-width: 218px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid darkgrey;
+  background-color: #FFFFFF;
+}
+
+.button:hover {
+  background-color: rgb(255, 235, 135);
+}
+
+.button__speaker_active {
+  background-color: rgb(255, 235, 135);
+}

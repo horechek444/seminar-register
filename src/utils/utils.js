@@ -39,7 +39,7 @@ export const timerNames = [
   {en: 'minutes', ru: 'Минут'},
   {en: 'seconds', ru: 'Секунд'}];
 
-// данные и расчеты для селектов
+// данные для селектов
 
 export const companies = [
   {
@@ -57,31 +57,6 @@ export const companies = [
       { value: 5, label: "Baker Hughes"},
     ]
   },
-  // {
-  //   value: 1,
-  //   label: "АО ИГиРГИ",
-  //   group: "Периметр ПАО «НК «РОСНЕФТЬ»"
-  // },
-  // {
-  //   value: 2,
-  //   label: "ПАО «НК «РОСНЕФТЬ»",
-  //   group: "Периметр ПАО «НК «РОСНЕФТЬ»"
-  // },
-  // {
-  //   value: 3,
-  //   label: "АО «Востсибнефтегаз»",
-  //   group: "Периметр ПАО «НК «РОСНЕФТЬ»"
-  // },
-  // {
-  //   value: 4,
-  //   label: "Schlumberger",
-  //   group: "Не входит в периметр ПАО «НК «РОСНЕФТЬ»"
-  // },
-  // {
-  //   value: 5,
-  //   label: "Baker Hughes",
-  //   group: "Не входит в периметр ПАО «НК «РОСНЕФТЬ»"
-  // },
 ];
 
 export const reportDirections = [

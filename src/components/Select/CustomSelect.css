@@ -1,0 +1,8 @@
+.select__wrapper {
+  position: relative;
+  display: flex;
+}
+
+.select {
+  min-width: 460px;
+}
