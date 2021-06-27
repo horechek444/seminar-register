@@ -1,28 +1,157 @@
+import * as yup from "yup";
+
+// данные и расчеты для таймера
+
 export const MILLISECONDS = 1000;
 export const SECONDS = 60;
 export const MINUTES = 60;
 export const HOURS = 24;
 
+export const dateOfSeminar = new Date(2021, 8, 29, 9, 0, 0, 0);
+
+export const getTimes = (timeBeforeSeminar) => {
+  return {
+    seconds: Math.floor((timeBeforeSeminar / MILLISECONDS) % SECONDS),
+    minutes: Math.floor((timeBeforeSeminar / MILLISECONDS / SECONDS) % MINUTES),
+    hours: Math.floor((timeBeforeSeminar / (MILLISECONDS * SECONDS * MINUTES)) % HOURS),
+    days: Math.floor(timeBeforeSeminar / (MILLISECONDS * SECONDS * MINUTES * HOURS)),
+  };
+};
+
+export const startTimer = (setTimes) => {
+  const interval = setInterval(() => {
+    const dateNow = new Date();
+    const timeBeforeSeminar = dateOfSeminar - dateNow;
+
+    if (timeBeforeSeminar < 0) {
+      clearInterval(interval);
+    } else {
+      setTimes(getTimes(timeBeforeSeminar));
+    }
+  }, 1000);
+
+  return interval;
+};
+
+export const timerNames = [
+  {en: 'days', ru: 'Дней'},
+  {en: 'hours', ru: 'Часов'},
+  {en: 'minutes', ru: 'Минут'},
+  {en: 'seconds', ru: 'Секунд'}];
+
+// данные и расчеты для селектов
+
 export const companies = [
   {
-    value: 1,
-    name: "АО ИГиРГИ"
+    label: "Периметр ПАО «НК «РОСНЕФТЬ»",
+    options: [
+      { value: 1, label: "АО ИГиРГИ"},
+      { value: 2, label: "ПАО «НК «РОСНЕФТЬ»"},
+      { value: 3, label: "АО «Востсибнефтегаз»"}
+    ]
   },
   {
-    value: 2,
-    name: "ПАО «НК «РОСНЕФТЬ»"
+    label: "Не входит в периметр ПАО «НК «РОСНЕФТЬ»",
+    options: [
+      { value: 4, label: "Schlumberger"},
+      { value: 5, label: "Baker Hughes"},
+    ]
   },
+  // {
+  //   value: 1,
+  //   label: "АО ИГиРГИ",
+  //   group: "Периметр ПАО «НК «РОСНЕФТЬ»"
+  // },
+  // {
+  //   value: 2,
+  //   label: "ПАО «НК «РОСНЕФТЬ»",
+  //   group: "Периметр ПАО «НК «РОСНЕФТЬ»"
+  // },
+  // {
+  //   value: 3,
+  //   label: "АО «Востсибнефтегаз»",
+  //   group: "Периметр ПАО «НК «РОСНЕФТЬ»"
+  // },
+  // {
+  //   value: 4,
+  //   label: "Schlumberger",
+  //   group: "Не входит в периметр ПАО «НК «РОСНЕФТЬ»"
+  // },
+  // {
+  //   value: 5,
+  //   label: "Baker Hughes",
+  //   group: "Не входит в периметр ПАО «НК «РОСНЕФТЬ»"
+  // },
 ];
 
 export const reportDirections = [
-  "Геологическое сопровождение бурения скважин",
-  "Геомеханика",
-  "Интерпретации данных ГИС при бурении",
-  "Геолого-технологические исследования",
-  "Сейсмогеологический анализ",
-  "Разработка месторождений горизонтальными скважинами",
-  "ГРП и методы закачивания горизонтальных скважин",
-  "Многозабойные горизонтальные скважины",
-  "Каротаж в процессе бурения. Полный комплекс ГИС российского производства",
-  "Другое"
+  {
+    value: "Геологическое сопровождение бурения скважин",
+    label: "Геологическое сопровождение бурения скважин"
+  },
+  {
+    value: "Геомеханика",
+    label: "Геомеханика"
+  },
+  {
+    value: "Интерпретации данных ГИС при бурении",
+    label: "Интерпретации данных ГИС при бурении"
+  },
+  {
+    value: "Геолого-технологические исследования",
+    label: "Геолого-технологические исследования"
+  },
+  {
+    value: "Сейсмогеологический анализ",
+    label: "Сейсмогеологический анализ"
+  },
+  {
+    value: "Разработка месторождений горизонтальными скважинами",
+    label: "Разработка месторождений горизонтальными скважинами"
+  },
+  {
+    value: "ГРП и методы закачивания горизонтальных скважин",
+    label: "ГРП и методы закачивания горизонтальных скважин"
+  },
+  {
+    value: "Многозабойные горизонтальные скважины",
+    label: "Многозабойные горизонтальные скважины"},
+  {
+    value: "Каротаж в процессе бурения. Полный комплекс ГИС российского производства",
+    label: "Каротаж в процессе бурения. Полный комплекс ГИС российского производства",
+  },
+  {
+    value: "Другое",
+    label: "Другое"
+  }
 ];
+
+// данные для валидации
+
+const phoneRegExp = /^.+\d.+\d{3}.+\d{3}.+\d{2}.+\d{2}$/;
+
+export const validationSchemaForAll = yup.object().shape({
+  secondName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  firstName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  middleName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  companyId: yup.object().required("Поле обязательно к заполнению"),
+  position: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  reportDirection: yup.object().required("Поле обязательно к заполнению"),
+  subject: yup.string().typeError("Значение должно быть строкой"),
+  email: yup.string().max(32).email("Значение должно быть email-адресом"),
+  officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
+  mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
+})
+
+export const validationSchemaForSpeaker = yup.object().shape({
+  secondName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  firstName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  middleName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  companyId: yup.object().required("Поле обязательно к заполнению"),
+  position: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  reportDirection: yup.object().required("Поле обязательно к заполнению"),
+  subject: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  email: yup.string().max(32).email("Значение должно быть email-адресом").required("Поле обязательно к заполнению"),
+  officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
+  mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
+})

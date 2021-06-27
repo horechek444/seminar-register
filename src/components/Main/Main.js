@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import './Main.css';
 import {Form, Formik} from "formik";
-import * as yup from "yup";
 import Input from "../Input/Input";
 import NumberFormat from 'react-number-format';
-import {reportDirections} from "../../utils/utils";
+import {reportDirections, validationSchemaForAll, validationSchemaForSpeaker, companies} from "../../utils/utils";
+import Select from "react-select";
 
 const Main = ({handlePopupOpen}) => {
   const [isSpeaker, setIsSpeaker] = useState(true);
@@ -14,25 +14,12 @@ const Main = ({handlePopupOpen}) => {
     setIsSpeaker(!isSpeaker);
   }
 
-  const handleSetListener = (e) => {
-    e.preventDefault();
-    setIsSpeaker(false);
-  }
-
-  const phoneRegExp = /^.+\d.+\d\d\d.+\d\d\d.+\d\d.+\d\d$/;
-
-  const validationSchema = yup.object().shape({
-    secondName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-    firstName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-    middleName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-    companyId: yup.number().positive().integer().required("Поле обязательно к заполнению"),
-    position: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-    reportDirection: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-    subject: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-    email: yup.string().max(32).email("Значение должно быть email-адресом").required("Поле обязательно к заполнению"),
-    officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
-    mobilePhone: yup.string().matches(phoneRegExp, "<kf,kf").required("Поле обязательно к заполнению"),
-  })
+  const formatGroupLabel = (data) => (
+    <>
+      <span>{data.label}</span>
+      <span>{data.options.length}</span>
+    </>
+  );
 
   return (
     <main className="main">
@@ -50,7 +37,7 @@ const Main = ({handlePopupOpen}) => {
       }}
               validateOnBlur
               onSubmit={(values) => console.log(values)}
-              validationSchema={validationSchema}
+              validationSchema={isSpeaker ? validationSchemaForSpeaker : validationSchemaForAll}
       >
         {({
             values,
@@ -59,7 +46,9 @@ const Main = ({handlePopupOpen}) => {
             handleChange,
             handleBlur,
             isValid,
-            handleSubmit
+            handleSubmit,
+            setFieldValue,
+            setFieldTouched,
           }) => (
           <Form className="form">
             <div className="form__row">
@@ -97,27 +86,21 @@ const Main = ({handlePopupOpen}) => {
 
             <div className="form__row">
               <div className="select__wrapper">
-                <select
-                  name="companyId"
-                  value={values.companyId}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Компания"
-                >
-                  <optgroup label="Периметр ПАО &laquo;НК &laquo;Роснефть&raquo;">
-                    <option value="">Компания</option>
-                    <option value="1">АО "ИГиРГИ"</option>
-                    <option value="2">ПАО «НК «РОСНЕФТЬ»</option>
-                    <option value="3">АО «Востсибнефтегаз»</option>
-                  </optgroup>
-                  <optgroup label="Не входит в периметр ПАО &laquo;НК &laquo;Роснефть&raquo;">
-                    <option value="4">Schlumberger</option>
-                    <option value="5">Baker Hughes</option>
-                    <option value="6">Halliburton</option>
-                  </optgroup>
-                </select>
+                <Select name="companyId"
+                        options={companies}
+                        value={values.companyId}
+                        onChange={value => setFieldValue("companyId", value)}
+                        onBlur={() => setFieldTouched("companyId", true)}
+                        placeholder="Компания"
+                        className="select"
+                        error={errors.companyId}
+                        touched={touched.companyId}
+                        formatGroupLabel={formatGroupLabel}
+                />
                 <span className="required">*</span>
-                {touched.companyId && errors.companyId && <span className="error">{errors.companyId}</span>}
+                {touched.companyId && errors.companyId &&
+                <span className="error">{errors.companyId}</span>}
+
               </div>
 
               <Input type="text"
@@ -133,31 +116,40 @@ const Main = ({handlePopupOpen}) => {
             </div>
 
             <div className="form__row">
-              <span>Участвую в семинаре как:</span>
-              <button className={isSpeaker ? "button button__speaker button__speaker_active" : "button button__speaker"}
-                      onClick={handleToggleSpeaker}>Докладчик / соавтор</button>
-              <button className={isSpeaker ? "button button__speaker" : "button button__speaker button__speaker_active"}
-                      onClick={handleToggleSpeaker}>Слушатель</button>
+              <span className="form__title">Участвую в семинаре как:</span>
+              <div className="form__wrapper">
+                <button
+                  className={isSpeaker ? "button button__speaker button__speaker_active" : "button button__speaker"}
+                  onClick={handleToggleSpeaker}>Докладчик/соавтор
+                </button>
+                <button
+                  className={isSpeaker ? "button button__speaker" : "button button__speaker button__speaker_active"}
+                  onClick={handleToggleSpeaker}>Слушатель
+                </button>
+              </div>
             </div>
 
             <div className={isSpeaker ? "report report_active" : "report"}>
               <div className="form__row">
                 <div className="select__wrapper">
-                  <select name="reportDirection"
-                          value={values.companyId}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          placeholder="Компания">
-                    <option value="" selected disabled>Направление доклада</option>
-                    {reportDirections.map((direction) => (
-                      <option value={direction}>{direction}</option>
-                    ))}
-                  </select>
+                  <Select name="reportDirection"
+                          options={reportDirections}
+                          value={values.reportDirection}
+                          onChange={value => setFieldValue("reportDirection", value)}
+                          onBlur={() => setFieldTouched("reportDirection", true)}
+                          placeholder="Направление доклада"
+                          className="select"
+                          error={errors.reportDirection}
+                          touched={touched.reportDirection}
+                  />
                   <span className="required">*</span>
-                  {touched.reportDirection && errors.reportDirection && <span className="error">{errors.reportDirection}</span>}
+                  {touched.reportDirection && errors.reportDirection &&
+                  <span className="error">{errors.reportDirection}</span>}
                 </div>
-                <button className="button">Докладчик</button>
-                <button className="button">Соавтор</button>
+                <div className="form__wrapper">
+                  <button className="button">Докладчик</button>
+                  <button className="button">Соавтор</button>
+                </div>
               </div>
 
               <div className="form__row">
@@ -183,8 +175,10 @@ const Main = ({handlePopupOpen}) => {
 
             <div className="form__row">
               <span>Форма участия:</span>
-              <button className="button">Очная</button>
-              <button className="button">Заочная</button>
+              <div className="form__wrapper">
+                <button className="button">Очная</button>
+                <button className="button">Заочная</button>
+              </div>
             </div>
 
             <span>Информация для связи:</span>

@@ -1,9 +1,8 @@
 .main__background {
   position: relative;
-  height: auto;
-  min-height: 100%;
   width: 100%;
   min-width: 960px;
+  min-height: 100vh;
   overflow: hidden;
   background: #f8f8f8 url('../../images/site_bg.png') 50% 0 no-repeat;
 }
@@ -12,6 +11,7 @@
   position: relative;
   padding: 0 0 215px;
   max-width: 1000px;
+  min-height: 100vh;
   margin: 0 auto;
   background-color: #ffffff;
 }
