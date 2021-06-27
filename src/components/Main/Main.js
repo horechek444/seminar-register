@@ -1,18 +1,33 @@
 import React, {useState} from 'react';
 import './Main.css';
-import {Form, Formik} from "formik";
+import {Form, Formik, Field} from "formik";
 import Input from "../Input/Input";
 import NumberFormat from 'react-number-format';
 import {reportDirections, validationSchemaForAll, validationSchemaForSpeaker, companies} from "../../utils/utils";
 import CustomSelect from "../Select/CustomSelect";
 import Button from "../Button/Button";
 
-const Main = ({handlePopupOpen}) => {
+const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
   const [isSpeaker, setIsSpeaker] = useState(true);
 
   const handleToggleSpeaker = (e) => {
     e.preventDefault();
     setIsSpeaker(!isSpeaker);
+  }
+
+  const handleSubmit = (values, {resetForm}) => {
+    resetForm({values: ''});
+    console.log(values);
+  }
+
+  const handleEmptyObject = (object) => {
+    for (let key in object) {
+      console.log(key)
+      // if (key == '') {
+      //   return false;
+      // }
+    }
+    // return true;
   }
 
   return (
@@ -28,9 +43,10 @@ const Main = ({handlePopupOpen}) => {
         email: '',
         officePhone: '',
         mobilePhone: '',
+        personalData: ''
       }}
               validateOnBlur
-              onSubmit={(values) => console.log(values)}
+              onSubmit={handleSubmit}
               validationSchema={isSpeaker ? validationSchemaForSpeaker : validationSchemaForAll}
       >
         {({
@@ -99,15 +115,17 @@ const Main = ({handlePopupOpen}) => {
                      touched={touched}
                      errors={errors}
               />
+              <p className="form__add" onClick={handleAddCompanyPopupOpen}>+ добавить новую компанию</p>
             </div>
 
             <div className="form__row">
               <span className="form__title">Участвую в семинаре как:</span>
               <div className="form__wrapper">
-                <Button className={isSpeaker ? "button button__speaker button__speaker_active" : "button button__speaker"}
-                        onClick={handleToggleSpeaker}
-                        title="Докладчик/соавтор"
-                        type="button"
+                <Button
+                  className={isSpeaker ? "button button__speaker button__speaker_active" : "button button__speaker"}
+                  onClick={handleToggleSpeaker}
+                  title="Докладчик/соавтор"
+                  type="button"
                 />
                 <Button
                   className={isSpeaker ? "button button__speaker" : "button button__speaker button__speaker_active"}
@@ -119,7 +137,7 @@ const Main = ({handlePopupOpen}) => {
             </div>
 
             <div className={isSpeaker ? "report report_active" : "report"}>
-              <div className="form__row">
+              <div className="form__row form__speaker">
                 <CustomSelect name="reportDirection"
                               placeholder="Направление доклада"
                               options={reportDirections}
@@ -130,11 +148,11 @@ const Main = ({handlePopupOpen}) => {
                               touched={touched}
                 />
                 <div className="form__wrapper">
-                  <Button className="button"
+                  <Button className="button button_small"
                           title="Докладчик"
                           type="button"
                   />
-                  <Button className="button"
+                  <Button className="button button_small"
                           title="Соавтор"
                           type="button"
                   />
@@ -230,18 +248,23 @@ const Main = ({handlePopupOpen}) => {
                 >seminar@igirgi.su
                 </a>
               </span>
-              <label>
-                <input type="radio"/>&ensp;
-                я согласен на&ensp;
-                <a href="#" onClick={handlePopupOpen}>обработку персональных данных</a>
-                <span className="required">*</span>
-              </label>
+              <div className="input-wrapper">
+                <label>
+                  <Field type="radio" name="personalData" value="dada"/>&ensp;
+                  я согласен на&ensp;
+                  <a href="#" onClick={handlePersonalDataPopupOpen}>обработку персональных данных</a>
+                  <span className="required">*</span>
+                </label>
+                {touched["personalData"] && errors["personalData"] &&
+                <span className="error">{errors["personalData"]}</span>}
+              </div>
             </div>
 
             <Button className="submit button"
                     type="submit"
                     onClick={handleSubmit}
                     title="Отправить заявку"
+                    // disabled={handleEmptyObject(values)}
             />
           </Form>
         )}

@@ -13,7 +13,6 @@ const Input = ({type, name, handleChange, handleBlur, values, placeholder, isReq
           value={values[name]}
           placeholder={placeholder}
           className={(name === "position" || name === "subject") ? "input input_double" : "input"}
-          maxLength="32"
         />{isRequired ? <span className="required">*</span> : null}
       </label>
       {touched[name] && errors[name] && <span className="error">{errors[name]}</span>}

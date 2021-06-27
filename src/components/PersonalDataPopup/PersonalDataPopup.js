@@ -1,5 +1,4 @@
 import React from 'react';
-import './PersonalDataPopup.css';
 import Popup from "../Popup/Popup";
 
 const PersonalDataPopup = ({isOpen, onClose}) => {

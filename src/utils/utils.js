@@ -41,7 +41,7 @@ export const timerNames = [
 
 // данные для селектов
 
-export const companies = [
+export let companies = [
   {
     label: "Периметр ПАО «НК «РОСНЕФТЬ»",
     options: [
@@ -58,6 +58,9 @@ export const companies = [
     ]
   },
 ];
+
+const lengthOfCompaniesArray = companies[1].options.length;
+export const valueNumber = (companies[1].options[lengthOfCompaniesArray - 1].value) + 1;
 
 export const reportDirections = [
   {
@@ -116,6 +119,7 @@ export const validationSchemaForAll = yup.object().shape({
   email: yup.string().max(32).email("Значение должно быть email-адресом"),
   officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
   mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
+  personalData: yup.string().required("Поле обязательно к заполнению"),
 })
 
 export const validationSchemaForSpeaker = yup.object().shape({
@@ -129,4 +133,9 @@ export const validationSchemaForSpeaker = yup.object().shape({
   email: yup.string().max(32).email("Значение должно быть email-адресом").required("Поле обязательно к заполнению"),
   officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
   mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
+  personalData: yup.string().required("Поле обязательно к заполнению"),
+})
+
+export const validationSchemaPopup = yup.object().shape({
+  companyName: yup.string().typeError("Значение должно быть строкой"),
 })

@@ -21,6 +21,15 @@
   padding-top: 15px;
 }
 
+.form__speaker {
+  justify-content: flex-start;
+}
+
+.form__add {
+  color: red;
+  cursor: pointer;
+}
+
 .submit {
   align-self: flex-end;
 }
@@ -46,6 +55,11 @@
   justify-content: space-between;
   min-width: 460px;
   padding-right: 12px;
+}
+
+.report .form__wrapper {
+  min-width: 218px;
+  padding: 0 0 0 25px;
 }
 
 ::-webkit-input-placeholder {

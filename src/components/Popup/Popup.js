@@ -23,10 +23,11 @@ const Popup = ({isOpen, onClose, children}) => {
   };
 
   return (
-    <section className={isOpen ? "popup popup_opened personal-data__popup" : "popup personal-data__popup"}
+    <section className={isOpen ? "popup popup_opened" : "popup"}
              onMouseUp={handleOverlayClose}>
       <div className="popup__container">
         {children}
+        <span className="popup__company">АО "ИГиРГИ"</span>
       </div>
     </section>
   );
