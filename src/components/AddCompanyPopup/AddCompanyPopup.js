@@ -19,8 +19,10 @@ const AddCompanyPopup = ({isOpen, onClose}) => {
           companyName: '',
         }}
                 validateOnBlur
-                onSubmit={(values) => {
+                onSubmit={(values, {resetForm}) => {
                   companies[1].options.push({value: valueNumber, label: values.companyName});
+                  resetForm({values: ''});
+                  onClose();
                   console.log(companies)
                 }}
                 validationSchema={validationSchemaPopup}
@@ -49,7 +51,7 @@ const AddCompanyPopup = ({isOpen, onClose}) => {
                       onClick={handleSubmit}
                       type="button"
                       title="Добавить"
-                      disabled={!isValid}
+                      disabled={!isValid || (Object.keys(touched).length === 0 && touched.constructor === Object)}
               />
             </Form>
           )}

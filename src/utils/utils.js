@@ -109,29 +109,29 @@ export const reportDirections = [
 const phoneRegExp = /^.+\d.+\d{3}.+\d{3}.+\d{2}.+\d{2}$/;
 
 export const validationSchemaForAll = yup.object().shape({
-  secondName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-  firstName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-  middleName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  secondName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  firstName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  middleName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
   companyId: yup.object().required("Поле обязательно к заполнению"),
-  position: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  position: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
   reportDirection: yup.object().required("Поле обязательно к заполнению"),
   subject: yup.string().typeError("Значение должно быть строкой"),
-  email: yup.string().max(32).email("Значение должно быть email-адресом"),
-  officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
+  email: yup.string().email("Значение должно быть email-адресом"),
+  officePhone: yup.string().required("Поле обязательно к заполнению"),
   mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
   personalData: yup.string().required("Поле обязательно к заполнению"),
 })
 
 export const validationSchemaForSpeaker = yup.object().shape({
-  secondName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-  firstName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-  middleName: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  secondName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  firstName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  middleName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
   companyId: yup.object().required("Поле обязательно к заполнению"),
-  position: yup.string().max(32).typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
+  position: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
   reportDirection: yup.object().required("Поле обязательно к заполнению"),
   subject: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-  email: yup.string().max(32).email("Значение должно быть email-адресом").required("Поле обязательно к заполнению"),
-  officePhone: yup.string().max(32).required("Поле обязательно к заполнению"),
+  email: yup.string().email("Значение должно быть email-адресом").required("Поле обязательно к заполнению"),
+  officePhone: yup.string().required("Поле обязательно к заполнению"),
   mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
   personalData: yup.string().required("Поле обязательно к заполнению"),
 })

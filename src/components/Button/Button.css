@@ -14,10 +14,17 @@
   background-color: rgb(255, 235, 135);
 }
 
-.button__speaker_active {
+.button_active {
   background-color: rgb(255, 235, 135);
 }
 
 .button_small {
   min-width: 100px;
 }
+
+.button:disabled:hover,
+.button:disabled {
+  background-color: #FFFFFF;
+  cursor: unset;
+}
+

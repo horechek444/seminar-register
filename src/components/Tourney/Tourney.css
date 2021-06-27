@@ -18,12 +18,26 @@
 
 .tourney__image {
   width: 355px;
+  height: 257px;
 }
 
 .tourney__text {
-  width: 445px;
+  width: 470px;
 }
 
 .tourney__paragraph {
-
+  text-align: justify;
 }
+
+.tourney__buttons-wrapper {
+  text-align: center;
+}
+
+.tourney__button:not(:last-of-type) {
+  margin-bottom: 28px;
+}
+
+.tourney__button:first-of-type {
+  margin-right: 28px;
+}
+

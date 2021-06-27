@@ -28,13 +28,13 @@ function App() {
   return (
     <div className="main__background">
       <div className="main__wrapper">
-        <Header />
+        <Header/>
         <Main handlePersonalDataPopupOpen={handlePersonalDataPopupOpen}
               handleAddCompanyPopupOpen={handleAddCompanyPopupOpen}
         />
-        <Footer />
-        <PersonalDataPopup isOpen={showPersonalDataPopup} onClose={handlePopupClose} />
-        <AddCompanyPopup isOpen={showAddCompanyPopup} onClose={handlePopupClose} />
+        <Footer/>
+        <PersonalDataPopup isOpen={showPersonalDataPopup} onClose={handlePopupClose}/>
+        <AddCompanyPopup isOpen={showAddCompanyPopup} onClose={handlePopupClose}/>
       </div>
     </div>
   );

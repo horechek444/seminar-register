@@ -25,6 +25,11 @@
   appearance: none;
   border-radius: .25rem;
   min-width: 280px;
+  font-family: Europe, Arial, sans-serif;
+}
+
+.input:hover {
+  border: 1px solid darkgrey;
 }
 
 .input_double {

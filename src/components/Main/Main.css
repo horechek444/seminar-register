@@ -42,6 +42,18 @@
   border-radius: .25rem;
 }
 
+.textarea:hover {
+  border: 1px solid darkgrey;
+}
+
+.title__margin {
+  margin-left: 15%;
+}
+
+.add__margin {
+  margin-left: 25%;
+}
+
 .report {
   display: none;
 }

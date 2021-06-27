@@ -7,31 +7,44 @@ import {reportDirections, validationSchemaForAll, validationSchemaForSpeaker, co
 import CustomSelect from "../Select/CustomSelect";
 import Button from "../Button/Button";
 import Tourney from "../Tourney/Tourney";
+import useButtons from "../../hooks/useButtons";
 
 const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
-  const [isSpeaker, setIsSpeaker] = useState(true);
+  const {
+    isSpeaker,
+    isListener,
+    isCoAuthor,
+    isMainAuthor,
+    isOnline,
+    isOffline,
+    isTournamentYes,
+    isTournamentNo,
+    isTournamentUndecided,
+    handleSpeaker,
+    handleListener,
+    handleCoAuthor,
+    handleMainAuthor,
+    handleOffline,
+    handleOnline,
+    handleButtonsReset
+  } = useButtons();
+
   const [formValues, setFormValues] = useState({});
 
   // let companyName = formValues ? formValues.companyId.label : null;
 
-  const handleToggleSpeaker = (e) => {
-    e.preventDefault();
-    setIsSpeaker(!isSpeaker);
-  }
-
   const handleSubmit = (values, {resetForm}) => {
+    values.coAuthor = isCoAuthor;
+    values.mainAuthor = isMainAuthor;
+    values.speaker = isSpeaker;
+    values.listener = isListener;
+    values.tournamentYes = isTournamentYes;
+    values.tournamentNo = isTournamentNo;
+    values.tournamentUndecided = isTournamentUndecided;
     resetForm({values: ''});
     setFormValues(values);
     console.log(values);
-  }
-
-  const handleEmptyObject = (object) => {
-    for (let key in object) {
-      if (key in object) {
-        return false;
-      }
-    }
-    return true;
+    handleButtonsReset();
   }
 
   return (
@@ -47,7 +60,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
         email: '',
         officePhone: '',
         mobilePhone: '',
-        personalData: ''
+        personalData: '',
       }}
               validateOnBlur
               onSubmit={handleSubmit}
@@ -119,23 +132,25 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                      touched={touched}
                      errors={errors}
               />
-              <p className="form__add" onClick={handleAddCompanyPopupOpen}>+ добавить новую компанию</p>
+              <p className="form__add add__margin" onClick={handleAddCompanyPopupOpen}>+ добавить новую компанию</p>
             </div>
 
             <div className="form__row">
-              <span className="form__title">Участвую в семинаре как:</span>
+              <span className="form__title title__margin">Участвую в семинаре как:</span>
               <div className="form__wrapper">
                 <Button
-                  className={isSpeaker ? "button button__speaker button__speaker_active" : "button button__speaker"}
-                  onClick={handleToggleSpeaker}
+                  className={isSpeaker ? "button button_active" : "button"}
+                  onClick={handleSpeaker}
                   title="Докладчик/соавтор"
                   type="button"
+                  name="speaker"
                 />
                 <Button
-                  className={isSpeaker ? "button button__speaker" : "button button__speaker button__speaker_active"}
-                  onClick={handleToggleSpeaker}
+                  className={isListener ? "button button_active" : "button"}
+                  onClick={handleListener}
                   title="Слушатель"
                   type="button"
+                  name="listener"
                 />
               </div>
             </div>
@@ -152,13 +167,15 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                               touched={touched}
                 />
                 <div className="form__wrapper">
-                  <Button className="button button_small"
+                  <Button className={isMainAuthor ? "button button_small button_active" : "button button_small"}
                           title="Докладчик"
                           type="button"
+                          onClick={handleMainAuthor}
                   />
-                  <Button className="button button_small"
+                  <Button className={isCoAuthor ? "button button_small button_active" : "button button_small"}
                           title="Соавтор"
                           type="button"
+                          onClick={handleCoAuthor}
                   />
                 </div>
               </div>
@@ -185,15 +202,17 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
             </div>
 
             <div className="form__row">
-              <span className="form__title">Форма участия:</span>
+              <span className="form__title title__margin">Форма участия:</span>
               <div className="form__wrapper">
-                <Button className="button"
+                <Button className={isOffline ? "button button_active" : "button"}
                         title="Очная"
                         type="button"
+                        onClick={handleOffline}
                 />
-                <Button className="button"
-                        title="Заочная"
+                <Button className={isOnline ? "button button_active" : "button"}
+                        title="Заочная(ВКС)"
                         type="button"
+                        onClick={handleOnline}
                 />
               </div>
             </div>
@@ -270,7 +289,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                     type="submit"
                     onClick={handleSubmit}
                     title="Отправить заявку"
-                    // disabled={handleEmptyObject(values)}
+                    disabled={!isValid || (Object.keys(touched).length === 0 && touched.constructor === Object)}
             />
           </Form>
         )}
