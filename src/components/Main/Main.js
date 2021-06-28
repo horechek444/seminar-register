@@ -32,7 +32,6 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
     handleButtonsReset
   } = useButtons();
 
-  // const [formValues, setFormValues] = useState({});
   const [company, setCompany] = useState(null);
 
   const handleSubmit = (values, {resetForm}) => {
@@ -43,7 +42,6 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
       values.tournamentYes = isTournamentYes;
       values.tournamentNo = isTournamentNo;
       values.tournamentUndecided = isTournamentUndecided;
-      // setFormValues(values);
       console.log(values);
       resetForm({values: ''});
       handleButtonsReset();
@@ -59,6 +57,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
         companyId: '',
         position: '',
         reportDirection: '',
+        outline: '',
         subject: '',
         email: '',
         officePhone: '',
@@ -202,6 +201,9 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                           name="outline"
                           placeholder="Краткое содержание доклада"
                           className="textarea"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values["outline"]}
                 />
               </div>
             </div>
