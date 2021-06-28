@@ -114,7 +114,7 @@ export const validationSchemaForAll = yup.object().shape({
   middleName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
   companyId: yup.object().required("Поле обязательно к заполнению"),
   position: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
-  reportDirection: yup.object().required("Поле обязательно к заполнению"),
+  reportDirection: yup.object(),
   subject: yup.string().typeError("Значение должно быть строкой"),
   email: yup.string().email("Значение должно быть email-адресом"),
   officePhone: yup.string().required("Поле обязательно к заполнению"),
