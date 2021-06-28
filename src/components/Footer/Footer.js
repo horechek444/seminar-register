@@ -3,7 +3,7 @@ import './Footer.css';
 import Recaptcha from "react-recaptcha";
 
 const Footer = () => {
-  const recaptchaLoaded = () => {
+  const handleRecaptchaSTate = () => {
     console.log("recaptcha loaded");
   }
 
@@ -12,10 +12,12 @@ const Footer = () => {
       <Recaptcha
         sitekey="6LeklFkbAAAAAI2mPRmQw4mwXZuiz-AaHmLGr-Ve"
         render="explicit"
-        onloadCallback={recaptchaLoaded}
+        onloadCallback={handleRecaptchaSTate}
+        hl="ru"
       />
     </footer>
   );
 };
+
 
 export default Footer;

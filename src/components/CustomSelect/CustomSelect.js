@@ -2,7 +2,7 @@ import React from 'react';
 import Select from "react-select";
 import './CustomSelect.css';
 
-const CustomSelect = ({name, placeholder, options, values, setFieldValue, setFieldTouched, errors, touched}) => {
+const CustomSelect = ({name, placeholder, options, values, setFieldValue, setFieldTouched, errors, touched, setCompanyName}) => {
   const formatGroupLabel = (data) => (
     <>
       <span>{data.label}</span>
@@ -11,6 +11,7 @@ const CustomSelect = ({name, placeholder, options, values, setFieldValue, setFie
 
   const handleSelectChange = (value) => {
     setFieldValue(name, value);
+    setCompanyName(value.label);
   };
 
   const handleSelectBlur = () => {

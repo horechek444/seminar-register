@@ -4,7 +4,7 @@ import {Form, Formik, Field} from "formik";
 import Input from "../Input/Input";
 import NumberFormat from 'react-number-format';
 import {reportDirections, validationSchemaForAll, validationSchemaForSpeaker, companies} from "../../utils/utils";
-import CustomSelect from "../Select/CustomSelect";
+import CustomSelect from "../CustomSelect/CustomSelect";
 import Button from "../Button/Button";
 import Tourney from "../Tourney/Tourney";
 import useButtons from "../../hooks/useButtons";
@@ -32,9 +32,8 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
     handleButtonsReset
   } = useButtons();
 
-  const [formValues, setFormValues] = useState({});
-
-  // let companyName = formValues ? formValues.companyId.label : null;
+  // const [formValues, setFormValues] = useState({});
+  const [companyName, setCompanyName] = useState(null);
 
   const handleSubmit = (values, {resetForm}) => {
     values.coAuthor = isCoAuthor;
@@ -44,11 +43,11 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
     values.tournamentYes = isTournamentYes;
     values.tournamentNo = isTournamentNo;
     values.tournamentUndecided = isTournamentUndecided;
-    resetForm({values: ''});
-    setFormValues(values);
+    // setFormValues(values);
     console.log(values);
-    console.log(formValues);
+    resetForm({values: ''});
     handleButtonsReset();
+    setCompanyName(null);
   }
 
   return (
@@ -124,6 +123,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                             setFieldTouched={setFieldTouched}
                             errors={errors}
                             touched={touched}
+                            setCompanyName={setCompanyName}
               />
 
               <Input type="text"
@@ -266,7 +266,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
               </div>
             </div>
 
-            <Tourney company={"companyName"}>
+            <Tourney company={companyName}>
               <div className="tourney__buttons-wrapper">
                 <Button className={isTournamentYes ? "button tourney__button button_active" : "button tourney__button"}
                         onClick={handleTournamentYes}
