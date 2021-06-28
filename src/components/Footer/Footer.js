@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <Recaptcha
-        sitekey="6LeklFkbAAAAAI2mPRmQw4mwXZuiz-AaHmLGr-Ve"
+        sitekey={process.env.CAPTCHA_KEY}
         render="explicit"
         onloadCallback={handleRecaptchaSTate}
         hl="ru"
