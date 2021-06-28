@@ -169,6 +169,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                               setFieldTouched={setFieldTouched}
                               errors={errors}
                               touched={touched}
+                              setCompany={setCompany}
                 />
                 <div className="form__wrapper">
                   <Button className={isMainAuthor ? "button button_small button_active" : "button button_small"}
