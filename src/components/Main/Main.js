@@ -35,17 +35,19 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
   const [company, setCompany] = useState(null);
 
   const handleSubmit = (values, {resetForm}) => {
-      values.coAuthor = isCoAuthor;
-      values.mainAuthor = isMainAuthor;
-      values.speaker = isSpeaker;
-      values.listener = isListener;
-      values.tournamentYes = isTournamentYes;
-      values.tournamentNo = isTournamentNo;
-      values.tournamentUndecided = isTournamentUndecided;
-      console.log(values);
-      resetForm({values: ''});
-      handleButtonsReset();
-      setCompany(null);
+    values.coAuthor = isCoAuthor;
+    values.mainAuthor = isMainAuthor;
+    values.speaker = isSpeaker;
+    values.listener = isListener;
+    values.online = isOnline;
+    values.offline = isOffline;
+    values.tournamentYes = isTournamentYes;
+    values.tournamentNo = isTournamentNo;
+    values.tournamentUndecided = isTournamentUndecided;
+    console.log(values);
+    resetForm({values: ''});
+    handleButtonsReset();
+    setCompany(null);
   }
 
   return (
@@ -279,11 +281,12 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                 <Button className={isTournamentNo ? "button tourney__button button_active" : "button tourney__button"}
                         onClick={handleTournamentNo}
                         type="button"
-                        title="Не планирую" />
-                <Button className={isTournamentUndecided ? "button tourney__button button_active" : "button tourney__button"}
-                        onClick={handleTournamentUndecided}
-                        type="button"
-                        title="Не определился(-лась)" />
+                        title="Не планирую"/>
+                <Button
+                  className={isTournamentUndecided ? "button tourney__button button_active" : "button tourney__button"}
+                  onClick={handleTournamentUndecided}
+                  type="button"
+                  title="Не определился(-лась)"/>
               </div>
             </Tourney>
 
