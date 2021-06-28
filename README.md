@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# seminar-register
+
+Приложение для регистрации на специализированный семинар.
+
+[![Внешний вид приложения](https://ic.wampi.ru/2021/06/28/SNIMOK-EKRANA-2021-06-28-V-16.12.42.png)]()
+
+## Используемые технологии:
+
+React, включая разбивку исходного кода на компоненты, CSS, методология БЭМ.
+Для получения данных форм использована библиотека formik, для валидации - yup.
+Элементы select реализованы при помощи react-select.
+Также используется react-number-format для установления определенного формата заполнения сотового телефона.
+Реализован таймер отсчета времени до наступления дня семинара.
+К проекту подключена reCAPTCHA.
+
+С проектом можно ознакомиться по ссылке: https://seminar-register.vercel.app.
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

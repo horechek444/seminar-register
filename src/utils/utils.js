@@ -103,7 +103,8 @@ export const reportDirections = [
 
 // данные для валидации
 
-const phoneRegExp = /^.+\d.+\d{3}.+\d{3}.+\d{2}.+\d{2}$/;
+const mobilePhoneRegExp = /^.+\d.+\d{3}.+\d{3}.+\d{2}.+\d{2}$/;
+const officePhoneRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
 
 export const validationSchemaForAll = yup.object().shape({
   secondName: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
@@ -114,8 +115,8 @@ export const validationSchemaForAll = yup.object().shape({
   reportDirection: yup.object(),
   subject: yup.string().typeError("Значение должно быть строкой"),
   email: yup.string().email("Значение должно быть email-адресом"),
-  officePhone: yup.string().required("Поле обязательно к заполнению"),
-  mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
+  officePhone: yup.string().matches(officePhoneRegExp, "Введите корректный формат номера телефона").required("Поле обязательно к заполнению"),
+  mobilePhone: yup.string().matches(mobilePhoneRegExp, "Введите номер в формате +7 (___)___-__-__").required("Поле обязательно к заполнению"),
   personalData: yup.string().required("Поле обязательно к заполнению"),
 })
 
@@ -128,8 +129,8 @@ export const validationSchemaForSpeaker = yup.object().shape({
   reportDirection: yup.object().required("Поле обязательно к заполнению"),
   subject: yup.string().typeError("Значение должно быть строкой").required("Поле обязательно к заполнению"),
   email: yup.string().email("Значение должно быть email-адресом").required("Поле обязательно к заполнению"),
-  officePhone: yup.string().required("Поле обязательно к заполнению"),
-  mobilePhone: yup.string().matches(phoneRegExp, "Введите корректные данные").required("Поле обязательно к заполнению"),
+  officePhone: yup.string().matches(officePhoneRegExp, "Введите корректный формат номера телефона").required("Поле обязательно к заполнению"),
+  mobilePhone: yup.string().matches(mobilePhoneRegExp, "Введите номер в формате +7 (___)___-__-__").required("Поле обязательно к заполнению"),
   personalData: yup.string().required("Поле обязательно к заполнению"),
 })
 
