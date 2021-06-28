@@ -22,7 +22,7 @@ function App() {
 
   const handlePopupClose = () => {
     setShowPersonalDataPopup(false);
-    setShowAddCompanyPopup(false)
+    setShowAddCompanyPopup(false);
   }
 
   return (

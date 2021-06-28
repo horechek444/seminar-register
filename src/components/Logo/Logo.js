@@ -4,7 +4,7 @@ import './Logo.css';
 
 const Logo = () => {
   return (
-    <a className="logo__link" href="https://seminar.igirgi.su/">
+    <a className="logo__link" href="/">
       <img className="logo" src={logo} alt="Логотип компании Роснефть"/>
     </a>
   );

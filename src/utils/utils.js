@@ -59,9 +59,6 @@ export let companies = [
   },
 ];
 
-const lengthOfCompaniesArray = companies[1].options.length;
-export const valueNumber = (companies[1].options[lengthOfCompaniesArray - 1].value) + 1;
-
 export const reportDirections = [
   {
     value: "Геологическое сопровождение бурения скважин",

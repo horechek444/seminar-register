@@ -1,13 +1,14 @@
 .button {
   font-family: Europe, Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.5;
   padding: 6px 15px;
   min-width: 218px;
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid darkgrey;
   background-color: #FFFFFF;
+  color: rgb(127, 127, 127);
 }
 
 .button:hover {
@@ -19,12 +20,16 @@
 }
 
 .button_small {
-  min-width: 100px;
+  min-width: 135px;
+}
+
+.button_big {
+  min-width: 297px;
 }
 
 .button:disabled:hover,
 .button:disabled {
-  background-color: #FFFFFF;
+  background-color: gainsboro;
   cursor: unset;
 }
 

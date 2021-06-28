@@ -23,15 +23,44 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border-radius: .25rem;
+  border-radius: 4px;
   min-width: 280px;
   font-family: Europe, Arial, sans-serif;
 }
 
 .input:hover {
-  border: 1px solid darkgrey;
+  border-color: hsl(0, 0%, 80%);
+  transition: all 100ms;
 }
 
 .input_double {
   width: 435px;
+}
+
+::-webkit-input-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+::-moz-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+:-moz-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+:-ms-input-placeholder {
+  font-family: Europe, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
 }

@@ -2,14 +2,20 @@ import React from 'react';
 import Popup from "../Popup/Popup";
 import Button from "../Button/Button";
 import './AddCompanyPopup.css';
-import {companies, validationSchemaPopup, valueNumber} from "../../utils/utils";
+import {companies, validationSchemaPopup} from "../../utils/utils";
 import {Form, Formik} from "formik";
 
 const AddCompanyPopup = ({isOpen, onClose}) => {
-  // const handleSubmit = (values) => {
-  //   companies[1].options.push({value: valueNumber, label: values.companyName});
-  //   console.log(companies);
-  // }
+  const handleNumber = () => {
+    const lengthOfCompaniesArray = companies[1].options.length;
+    return (companies[1].options[lengthOfCompaniesArray - 1].value) + 1;
+  }
+
+  const handleSubmit = (values, {resetForm}) => {
+    companies[1].options.push({value: handleNumber(), label: values.companyName, invite: 5});
+    resetForm({values: ''});
+    onClose();
+  }
 
   return (
     <Popup isOpen={isOpen} onClose={onClose}>
@@ -19,12 +25,7 @@ const AddCompanyPopup = ({isOpen, onClose}) => {
           companyName: '',
         }}
                 validateOnBlur
-                onSubmit={(values, {resetForm}) => {
-                  companies[1].options.push({value: valueNumber, label: values.companyName, invite: 5});
-                  resetForm({values: ''});
-                  onClose();
-                  console.log(companies)
-                }}
+                onSubmit={handleSubmit}
                 validationSchema={validationSchemaPopup}
         >
           {({
@@ -51,7 +52,7 @@ const AddCompanyPopup = ({isOpen, onClose}) => {
                       onClick={handleSubmit}
                       type="button"
                       title="Добавить"
-                      disabled={!isValid || (Object.keys(touched).length === 0 && touched.constructor === Object)}
+                      disabled={!isValid || values["companyName"] === ''}
               />
             </Form>
           )}

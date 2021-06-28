@@ -33,21 +33,21 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
   } = useButtons();
 
   // const [formValues, setFormValues] = useState({});
-  const [companyName, setCompanyName] = useState(null);
+  const [company, setCompany] = useState(null);
 
   const handleSubmit = (values, {resetForm}) => {
-    values.coAuthor = isCoAuthor;
-    values.mainAuthor = isMainAuthor;
-    values.speaker = isSpeaker;
-    values.listener = isListener;
-    values.tournamentYes = isTournamentYes;
-    values.tournamentNo = isTournamentNo;
-    values.tournamentUndecided = isTournamentUndecided;
-    // setFormValues(values);
-    console.log(values);
-    resetForm({values: ''});
-    handleButtonsReset();
-    setCompanyName(null);
+      values.coAuthor = isCoAuthor;
+      values.mainAuthor = isMainAuthor;
+      values.speaker = isSpeaker;
+      values.listener = isListener;
+      values.tournamentYes = isTournamentYes;
+      values.tournamentNo = isTournamentNo;
+      values.tournamentUndecided = isTournamentUndecided;
+      // setFormValues(values);
+      console.log(values);
+      resetForm({values: ''});
+      handleButtonsReset();
+      setCompany(null);
   }
 
   return (
@@ -123,7 +123,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                             setFieldTouched={setFieldTouched}
                             errors={errors}
                             touched={touched}
-                            setCompanyName={setCompanyName}
+                            setCompany={setCompany}
               />
 
               <Input type="text"
@@ -143,14 +143,14 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
               <span className="form__title title__margin">Участвую в семинаре как:</span>
               <div className="form__wrapper">
                 <Button
-                  className={isSpeaker ? "button button_active" : "button"}
+                  className={isSpeaker ? "button button_active button_big" : "button button_big"}
                   onClick={handleSpeaker}
                   title="Докладчик/соавтор"
                   type="button"
                   name="speaker"
                 />
                 <Button
-                  className={isListener ? "button button_active" : "button"}
+                  className={isListener ? "button button_active button_small" : "button button_small"}
                   onClick={handleListener}
                   title="Слушатель"
                   type="button"
@@ -214,7 +214,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
                         onClick={handleOffline}
                 />
                 <Button className={isOnline ? "button button_active" : "button"}
-                        title="Заочная(ВКС)"
+                        title="Заочная (ВКС)"
                         type="button"
                         onClick={handleOnline}
                 />
@@ -266,7 +266,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
               </div>
             </div>
 
-            <Tourney company={companyName}>
+            <Tourney company={company}>
               <div className="tourney__buttons-wrapper">
                 <Button className={isTournamentYes ? "button tourney__button button_active" : "button tourney__button"}
                         onClick={handleTournamentYes}
