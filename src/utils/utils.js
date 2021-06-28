@@ -45,16 +45,16 @@ export let companies = [
   {
     label: "Периметр ПАО «НК «РОСНЕФТЬ»",
     options: [
-      { value: 1, label: "АО ИГиРГИ"},
-      { value: 2, label: "ПАО «НК «РОСНЕФТЬ»"},
-      { value: 3, label: "АО «Востсибнефтегаз»"}
+      { value: 1, label: "АО ИГиРГИ", invite: 0},
+      { value: 2, label: "ПАО «НК «РОСНЕФТЬ»", invite: 2},
+      { value: 3, label: "АО «Востсибнефтегаз»", invite: 1}
     ]
   },
   {
     label: "Не входит в периметр ПАО «НК «РОСНЕФТЬ»",
     options: [
-      { value: 4, label: "Schlumberger"},
-      { value: 5, label: "Baker Hughes"},
+      { value: 4, label: "Schlumberger", invite: 1},
+      { value: 5, label: "Baker Hughes", invite: 3},
     ]
   },
 ];

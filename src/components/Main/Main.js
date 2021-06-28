@@ -20,6 +20,9 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
     isTournamentYes,
     isTournamentNo,
     isTournamentUndecided,
+    handleTournamentYes,
+    handleTournamentNo,
+    handleTournamentUndecided,
     handleSpeaker,
     handleListener,
     handleCoAuthor,
@@ -44,6 +47,7 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
     resetForm({values: ''});
     setFormValues(values);
     console.log(values);
+    console.log(formValues);
     handleButtonsReset();
   }
 
@@ -262,7 +266,23 @@ const Main = ({handlePersonalDataPopupOpen, handleAddCompanyPopupOpen}) => {
               </div>
             </div>
 
-            <Tourney company={"companyName"} />
+            <Tourney company={"companyName"}>
+              <div className="tourney__buttons-wrapper">
+                <Button className={isTournamentYes ? "button tourney__button button_active" : "button tourney__button"}
+                        onClick={handleTournamentYes}
+                        type="button"
+                        title="Планирую"
+                />
+                <Button className={isTournamentNo ? "button tourney__button button_active" : "button tourney__button"}
+                        onClick={handleTournamentNo}
+                        type="button"
+                        title="Не планирую" />
+                <Button className={isTournamentUndecided ? "button tourney__button button_active" : "button tourney__button"}
+                        onClick={handleTournamentUndecided}
+                        type="button"
+                        title="Не определился(-лась)" />
+              </div>
+            </Tourney>
 
             <div className="form__row form__row_dashed">
               <span className="footer__email">Остались вопросы? Напиши нам:&ensp;

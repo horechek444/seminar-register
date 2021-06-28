@@ -20,7 +20,7 @@ const AddCompanyPopup = ({isOpen, onClose}) => {
         }}
                 validateOnBlur
                 onSubmit={(values, {resetForm}) => {
-                  companies[1].options.push({value: valueNumber, label: values.companyName});
+                  companies[1].options.push({value: valueNumber, label: values.companyName, invite: 5});
                   resetForm({values: ''});
                   onClose();
                   console.log(companies)
