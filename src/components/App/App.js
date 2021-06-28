@@ -5,7 +5,6 @@ import Footer from "../Footer/Footer";
 import PersonalDataPopup from "../PersonalDataPopup/PersonalDataPopup";
 import Main from "../Main/Main";
 import AddCompanyPopup from "../AddCompanyPopup/AddCompanyPopup";
-import Recaptcha from 'react-recaptcha';
 
 function App() {
   const [showPersonalDataPopup, setShowPersonalDataPopup] = useState(false);
@@ -26,10 +25,6 @@ function App() {
     setShowAddCompanyPopup(false)
   }
 
-  const recaptchaLoaded = () => {
-    console.log("recaptcha loaded");
-  }
-
   return (
     <div className="main__background">
       <div className="main__wrapper">
@@ -37,14 +32,9 @@ function App() {
         <Main handlePersonalDataPopupOpen={handlePersonalDataPopupOpen}
               handleAddCompanyPopupOpen={handleAddCompanyPopupOpen}
         />
-        <Footer/>
+        <Footer />
         <PersonalDataPopup isOpen={showPersonalDataPopup} onClose={handlePopupClose}/>
         <AddCompanyPopup isOpen={showAddCompanyPopup} onClose={handlePopupClose}/>
-        <Recaptcha
-          sitekey="6LeklFkbAAAAAI2mPRmQw4mwXZuiz-AaHmLGr-Ve"
-          render="explicit"
-          onloadCallback={recaptchaLoaded}
-        />
       </div>
     </div>
   );
